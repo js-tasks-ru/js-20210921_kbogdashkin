@@ -10,7 +10,7 @@ export function createGetter(path) {
     if (!path) {
       return obj;
     }
-    const parts = path.split('.');
+
     for (let i = 0; i < parts.length; ++i) {
       if (!obj) {
         return obj;
