@@ -11,12 +11,10 @@ export function createGetter(path) {
       return obj;
     }
 
-    for (let i = 0; i < parts.length; ++i) {
-      if (!obj) {
-        return obj;
+    for (const property of parts) {
+      if (obj === undefined) {
+        break;
       }
-
-      const property = parts[i];
 
       obj = obj[property];
     }
