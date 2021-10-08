@@ -1,12 +1,13 @@
 export default class NotificationMessage {
+  static instance;
   timeOut;
   element;
 
   constructor(message = '', {duration = 1000, type = 'success'} = {}) {
-    if (NotificationMessage._instance) {
-      NotificationMessage._instance.destroy();
+    if (NotificationMessage.instance) {
+      NotificationMessage.instance.destroy();
     }
-    NotificationMessage._instance = this;
+    NotificationMessage.instance = this;
 
     this.message = message;
     this.duration = duration;
@@ -26,12 +27,8 @@ export default class NotificationMessage {
     </div>`;
   }
 
-  show(el = null) {
-    if (el) {
-      el.append(this.element);
-    } else {
-      document.body.append(this.element);
-    }
+  show(el = document.body) {
+    el.append(this.element);
 
     if (this.timeOut) {
       clearTimeout(this.timeOut);
@@ -61,6 +58,6 @@ export default class NotificationMessage {
   destroy() {
     this.remove();
     this.element = null;
-    NotificationMessage._instance = null;
+    NotificationMessage.instance = null;
   }
 }
